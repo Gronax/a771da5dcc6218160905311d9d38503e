@@ -16,7 +16,7 @@ export function useProducts() {
   );
 
   return {
-    products: data && data.products,
+    products: (data && data.products) || [],
     isLoading: !error && !data,
     isError: error,
   };
