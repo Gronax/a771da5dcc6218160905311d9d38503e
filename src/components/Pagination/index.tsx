@@ -11,6 +11,7 @@ const Pagination = ({ currentPage, pageNumbers, paginate }: Props) => {
     <nav className="page-container">
       {pageNumbers.map((number) => (
         <button
+          key={number}
           onClick={() => paginate(number)}
           className={`page-item${
             number === currentPage ? " page-item--active" : ""

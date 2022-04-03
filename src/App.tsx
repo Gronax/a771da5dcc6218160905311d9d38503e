@@ -38,7 +38,7 @@ const App = () => {
     pageNumbers.push(i);
   }
 
-  const todosData = useMemo(() => {
+  const currentItems = useMemo(() => {
     let computedProducts = products;
 
     if (searchTerm) {
@@ -59,7 +59,7 @@ const App = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <div>
+    <>
       <Search
         value={searchTerm}
         onChange={(e) => {
@@ -67,13 +67,13 @@ const App = () => {
           setCurrentPage(1);
         }}
       />
-      <List currentItems={todosData} />
+      <List currentItems={currentItems} />
       <Pagination
         currentPage={currentPage}
         pageNumbers={pageNumbers}
         paginate={paginate}
       />
-    </div>
+    </>
   );
 };
 

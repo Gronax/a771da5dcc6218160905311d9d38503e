@@ -1,6 +1,3 @@
-import React from "react";
-import "./style.scss";
-
 interface Props {
   error: any;
 }
