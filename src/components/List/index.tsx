@@ -1,41 +1,14 @@
-import React, { useState, useEffect } from "react";
-import { useProducts } from "../../hooks/useApi";
 import { Product } from "../../types/api";
 import "./style.scss";
+interface Props {
+  currentItems: Product[];
+}
 
-const List = () => {
-  const { products, isLoading, isError } = useProducts();
-  const [data, setData] = useState<Product[]>(products);
-  const [query, setQuery] = useState<string>("");
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const keyword = e.target.value;
-
-    const foundItems = products.filter((item: Product) =>
-      item.title.toLowerCase().includes(query.toLowerCase())
-    );
-
-    setData(keyword ? foundItems : products);
-    setQuery(keyword);
-  };
-
-  useEffect(() => {
-    !isLoading && setData(products);
-  }, [isLoading, products]);
-
-  if (isError) return <div>An error has occurred. {isError}</div>;
-  if (isLoading) return <div>Loading...</div>;
-
+const List = ({ currentItems }: Props) => {
   return (
-    <div className="list">
-      <input
-        type="search"
-        placeholder="Search..."
-        value={query}
-        onChange={handleSearch}
-      />
-      {data &&
-        data.map((product) => (
+    <div className="item-container">
+      {currentItems && currentItems.length ? (
+        currentItems.map((product) => (
           <div key={product.id} className="list-item">
             {product.title}
             {product.variants.map((variant) => (
@@ -51,9 +24,11 @@ const List = () => {
                 className="list-item__image"
               />
             ))}
-            {/* <div dangerouslySetInnerHTML={{ __html: product.body_html }} /> */}
           </div>
-        ))}
+        ))
+      ) : (
+        <div className="no-result">No result. Please try something else.</div>
+      )}
     </div>
   );
 };

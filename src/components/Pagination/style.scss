@@ -1,0 +1,28 @@
+$base-color: #c6538c;
+
+.page {
+  &-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1rem 0;
+    padding: 0 1rem;
+  }
+  &-item {
+    background-color: $base-color;
+    border-radius: 8px;
+    border: 1px solid rgba($base-color, 0.88);
+    color: #fafafa;
+    cursor: pointer;
+    padding: 1rem;
+
+    &:hover {
+      background-color: darken($base-color, 10%);
+    }
+    &--active {
+      background-color: lighten($base-color, 20%);
+      border-color: lighten($base-color, 10%);
+    }
+  }
+}
